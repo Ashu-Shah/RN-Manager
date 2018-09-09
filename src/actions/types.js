@@ -8,4 +8,7 @@ export const LOGIN_USER = 'login_user';
 /*================= EMPLOYEE FORM =================*/
 export const EMPLOYEE_UPDATE = 'employee_update';
 export const EMPLOYEE_CREATE = 'employee_create';
+export const EMPLOYEE_SAVE_SUCCESS = 'employee_save_success';
+
+/*================= EMPLOYEE LIST =================*/
 export const EMPLOYEES_FETCH_SUCCESS = 'employees_fetch_success';
