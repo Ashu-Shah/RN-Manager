@@ -1,8 +1,12 @@
 import { Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS,  EMPLOYEE_SAVE_SUCCESS} from './types';
+import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS,  EMPLOYEE_SAVE_SUCCESS, EMPLOYEE_FORM_RESET } from './types';
 
 const firebase = require('firebase');
+
+export const resetForm = () => ({
+    type: EMPLOYEE_FORM_RESET
+});
 
 export const employeeUpdate = ({ prop, value }) => ({
     type: EMPLOYEE_UPDATE,
@@ -40,5 +44,14 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
                 dispatch({ type: EMPLOYEE_SAVE_SUCCESS });
                 Actions.pop();
             });
+    }
+};
+
+export const employeeDelete = ({ uid }) => {
+    const { currentUser } = firebase.auth();
+    return() => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove()
+            .then(() => Actions.pop())
     }
 };

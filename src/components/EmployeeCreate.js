@@ -1,14 +1,14 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button } from './common/index';
-import { employeeCreate } from '../actions/index';
+import { employeeCreate, resetForm } from '../actions/index';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeCreate extends Component{
 
-    constructor() {
-        super();
-
+    componentWillMount() {
+        this.props.resetForm();
     }
 
     onButtonPress = () => {
@@ -35,4 +35,4 @@ const mapStateToProps = ({ employeeForm }) => {
     return{ name, phone, shift }
 };
 
-export default connect(mapStateToProps, { employeeCreate })(EmployeeCreate)
+export default connect(mapStateToProps, { employeeCreate, resetForm })(EmployeeCreate)
